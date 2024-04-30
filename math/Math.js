@@ -47,9 +47,22 @@ class myMath {
 
   return (n < 0) ? -1 : 1;
   }
-  pow(n, s) {
-    if(s === 0) return 1;
-    return n*this.pow(n, s-1)
+  pow(base, power){
+    // your code here
+    if(power ==0) return 1;
+    
+    if(power == 1) return base;
+  
+    if(power === -1) return 1/base;
+  
+    if(power % 2 ==0 ) {
+      
+      let res = pow(base, power/2);
+      
+      return res * res;
+    }
+  
+    return base * pow(base, power-1)
   }
   sqrt (n) {
     let z= 1.0
