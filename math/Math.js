@@ -10,13 +10,20 @@ class myMath {
     return max;
   }
   min(...arg) {
- arg = arg.map(Number);
-    let min = arg[0];
-    for (let i = 0; i < arg.length; i++) {
-      if (arg[i] < min) {
-        min = arg[i];
-      }
-    }
+
+      arg = arg.map(Number);
+
+          let min = arg[0];
+
+          for (let i = 0; i < arg.length; i++) {
+
+            if (arg[i] < min) {
+
+              min = arg[i];
+
+            }
+          }
+          
     return min;
   };
   round(n) {
