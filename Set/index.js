@@ -18,7 +18,13 @@ class Set {
         this.size--;
         return delete this._[value]
      }
-    difference() {}
+    difference(newSet) {
+        let newValue = {};
+        for(let key in this._){
+          if(!(`${key}` in newSet)) newValue[key] =this._[key]
+        }
+        return newValue;
+    }
     entries() {
         let arr=[];
         for(let i=0; i<=this.size; i++) {
@@ -58,12 +64,22 @@ class Set {
         return true
     }
     union (newSet) {
+        let newValue ={...this._}
         for(let key in newSet) {
-            this._[key]= newSet[key]
+            newValue[key]= newSet[key]
         }
-        return this._
+        return newValue
     }
-    symmetricDifference(){}
+    symmetricDifference(newSet){
+        let newValue = {...this._};
+        debugger
+        for(let key in newSet) {
+            if(!(`${key}` in newValue)) {
+                newValue[key]=newSet[key]
+            } else delete newValue[key]
+        }
+        return newValue;
+    }
     intersection(newSet) {
         let newSetList ={};
         for(let key in newSet) {
@@ -76,8 +92,11 @@ class Set {
         this.size =0;
     }
 }
-const fours = new Set([4, 8, 12, 16]);
-const evens = new Set([2, 4, 6, 8, 10, 12, 14, 16, 18]);
-console.log(fours.isSubsetOf(evens._));
-console.log(evens.isSupersetOf(fours._));
-console.log(evens.union(fours._));
+const evens = new Set([2, 4, 6, 8]);
+const fours = new Set([1, 4, 9]);
+// console.log(evens._);
+// console.log(fours._);
+
+// console.log(evens.union(fours._));
+// console.log(evens.symmetricDifference(fours._));
+console.log(evens.difference(fours._));
