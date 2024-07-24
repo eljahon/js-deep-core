@@ -1,148 +1,148 @@
 class myString {
- #data;
- constructor(data) {
-          this.#data = data;
-          this.length = data.length;
- }
- toLowerCase() {
-             const listCode = []
+    #data;
+    constructor(data) {
+        this.#data = data;
+        this.length = data.length;
+    }
+    toLowerCase() {
+        const listCode = []
 
-          for(let i=0; i<this.length; i++) {
+        for (let i = 0; i < this.length; i++) {
 
-                    const stringCode =this.#data.charCodeAt(i)
+            const stringCode = this.#data.charCodeAt(i)
 
-                    if(stringCode>96&&stringCode<123)  listCode.push(stringCode)
-                              
-                    if(stringCode>64&&stringCode<91) listCode.push(stringCode+32)
-                    
-          }
+            if (stringCode > 96 && stringCode < 123) listCode.push(stringCode)
 
-          return String.fromCharCode(...listCode)
- }
- toUpperCase() {
-    const listCode = []
+            if (stringCode > 64 && stringCode < 91) listCode.push(stringCode + 32)
 
-        for(let i=0; i<this.length; i++) {
-
-                const stringCode =this.#data.charCodeAt(i)
-
-                if(stringCode>96&&stringCode<123)  listCode.push(stringCode-32)
-                            
-                if(stringCode>64&&stringCode<91) listCode.push(stringCode)
-                
         }
 
- return String.fromCharCode(...listCode)
-}
-padEnd(targetLength, padString) {
-    let res = this.#data;
-    for (let i=this.length-1; i<this.length-1+targetLength; i++) {
-        res+= padString ?? ''
+        return String.fromCharCode(...listCode)
     }
-    return res;
-}
-padStart(targetLength, padString) {
-    let res = this.#data;
-    for (let i=0; i<this.length-1+targetLength; i++) {
-        res+= padString ?? ''
-    }
-    return res;
-}
-indexOf (str) {
-    let res = -1;
-    for (let i=0; i<this.length; i++) {
-        if (this.#data[i] === str) {
-            res = i;
-            break;
-        }
-    }
-    return res;
-}
-lastIndexOf(str) {
-    let res = -1;
-    for (let i=this.length-1; i>=0; i--) {
-        if (this.#data[i] === str) {
-            res = i;
-            break;
-        }
-    }
-    return res;
-}
-includes(str) {
-    for (let i=0; i<this.length; i++) {
-        if (this.#data[i] === str) {
-            return true;
-        }
-    }
-    return false;
-}
-charCodeAt(str) {
-    return this.#data.charCodeAt(str);
-}
-slice(begin, end) {
-    let result = '';
-    if(begin>0&&end>0) {
-          for(let i=begin-1; i<end; i++) {
-            result += this.#data[i]
-          }
-        return result
+    toUpperCase() {
+        const listCode = []
 
-    } 
-    if(begin>0&&end<0) {
-        for(let i=this.length-1; i>end; i--) {
-            result += this.#data[i]
-        }
-        return result
+        for (let i = 0; i < this.length; i++) {
 
-    } 
-    if(begin>0&&!end) {
-        for(let i=begin; i<this.length; i++) {
-            result += this.#data[i]
-        }
-        return result
+            const stringCode = this.#data.charCodeAt(i)
 
-    }
-    if(begin<0&&end<0) {
-        for(let i=this.length-1; i>begin; i--) {
-            result += this.#data[i]
+            if (stringCode > 96 && stringCode < 123) listCode.push(stringCode - 32)
+
+            if (stringCode > 64 && stringCode < 91) listCode.push(stringCode)
+
         }
-        return result
+
+        return String.fromCharCode(...listCode)
     }
-    let res = this.#data;
-    return res;
-}
-search (str) {
-    let res = -1;
-    for (let i=0; i<this.length; i++) {
-        if (this.#data[i] === str) {
-            res = i;
-            break;
+    padEnd(targetLength, padString) {
+        let res = this.#data;
+        for (let i = this.length - 1; i < this.length - 1 + targetLength; i++) {
+            res += padString ?? ''
         }
+        return res;
     }
-    return res;
-}
-replace (pattern, replacement) {
-    let res = '';
-    for (let i=0; i<this.length; i++) {
-        if (this.#data[i] === pattern) {
-            res += replacement;
-        } else {
-            res += this.#data[i];
+    padStart(targetLength, padString) {
+        let res = this.#data;
+        for (let i = 0; i < this.length - 1 + targetLength; i++) {
+            res += padString ?? ''
         }
+        return res;
     }
-    return res;
-}
-replaceAll (pattern, replacement) {
-    let res = '';
-    for (let i=0; i<this.length; i++) {
-        if (this.#data[i] === pattern) {
-            res += replacement;
-        } else {
-            res += this.#data[i];
+    indexOf(str) {
+        let res = -1;
+        for (let i = 0; i < this.length; i++) {
+            if (this.#data[i] === str) {
+                res = i;
+                break;
+            }
         }
+        return res;
     }
-    return res;
-}
+    lastIndexOf(str) {
+        let res = -1;
+        for (let i = this.length - 1; i >= 0; i--) {
+            if (this.#data[i] === str) {
+                res = i;
+                break;
+            }
+        }
+        return res;
+    }
+    includes(str) {
+        for (let i = 0; i < this.length; i++) {
+            if (this.#data[i] === str) {
+                return true;
+            }
+        }
+        return false;
+    }
+    charCodeAt(str) {
+        return this.#data.charCodeAt(str);
+    }
+    slice(begin, end) {
+        let result = '';
+        if (begin > 0 && end > 0) {
+            for (let i = begin - 1; i < end; i++) {
+                result += this.#data[i]
+            }
+            return result
+
+        }
+        if (begin > 0 && end < 0) {
+            for (let i = this.length - 1; i > end; i--) {
+                result += this.#data[i]
+            }
+            return result
+
+        }
+        if (begin > 0 && !end) {
+            for (let i = begin; i < this.length; i++) {
+                result += this.#data[i]
+            }
+            return result
+
+        }
+        if (begin < 0 && end < 0) {
+            for (let i = this.length - 1; i > begin; i--) {
+                result += this.#data[i]
+            }
+            return result
+        }
+        let res = this.#data;
+        return res;
+    }
+    search(str) {
+        let res = -1;
+        for (let i = 0; i < this.length; i++) {
+            if (this.#data[i] === str) {
+                res = i;
+                break;
+            }
+        }
+        return res;
+    }
+    replace(pattern, replacement) {
+        let res = '';
+        for (let i = 0; i < this.length; i++) {
+            if (this.#data[i] === pattern) {
+                res += replacement;
+            } else {
+                res += this.#data[i];
+            }
+        }
+        return res;
+    }
+    replaceAll(pattern, replacement) {
+        let res = '';
+        for (let i = 0; i < this.length; i++) {
+            if (this.#data[i] === pattern) {
+                res += replacement;
+            } else {
+                res += this.#data[i];
+            }
+        }
+        return res;
+    }
 }
 let str = new myString('Salom');
 console.log(str.toLowerCase());

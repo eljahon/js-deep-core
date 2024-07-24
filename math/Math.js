@@ -60,7 +60,7 @@ class myMath {
     
     if(power == 1) return base;
   
-    if(power === -1) return 1/base;
+    if(power === -1) return 1/base * pow(base, (Math.abs(power)-1)*-1);
   
     if(power % 2 ==0 ) {
       
