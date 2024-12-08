@@ -28,7 +28,7 @@ class myMath {
   };
   round(n) {
   	if (n < 0.0) {
-      var rest = (n % 1.0);
+      let rest = (n % 1.0);
       if(rest < -0.5) {
         rest += 1.0;
       }
@@ -82,6 +82,14 @@ class myMath {
   abs (n) {
     return n > 0 ? n : n*-1
   }
+  random () {
+    let lastRand = 0.5;
+        let x = new Date().getTime()*Math.PI*lastRand;
+        let randNum = x%1;
+        lastRand = randNum;
+        
+        return randNum;
+  }
 };
 const math = new myMath();
 console.log(math.max(1,2,3,4));
@@ -93,3 +101,4 @@ console.log(math.sign(0));
 console.log(math.sign(0));
 console.log(math.abs(-2));
 console.log(math.sqrt(2));
+console.log(math.random());

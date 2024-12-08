@@ -94,9 +94,5 @@ class Set {
 }
 const evens = new Set([2, 4, 6, 8]);
 const fours = new Set([1, 4, 9]);
-// console.log(evens._);
-// console.log(fours._);
-
-// console.log(evens.union(fours._));
-// console.log(evens.symmetricDifference(fours._));
 console.log(evens.difference(fours._));
+console.log({...[2, 4, 6, 8]});
