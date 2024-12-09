@@ -1,87 +1,212 @@
 class Array {
   constructor() {
     this.length = 0;
-    this.data = {};
   }
-  push(elemnt) {
-    this.data[this.length] = elemnt;
-    this.length++;
-    return Object.values(this.data);
+  toString() {
+  return `[${this.join(', ')}]`;
+}
+  forEach(callback) {
+    for(let i=0; i<=this.length; i++) {
+        callback(this[i], i, this)
+    }
   }
-  pop() {
-    delete this.data[this.length - 1];
+
+  push(...values) {
+    for (let i = 0; i < values.length; i++) {
+      this[this.length] = values[i];
+      this.length++;
+    }
+  }
+  pop() { 
+    let res = this[this.length - 1];
+    delete this[this.length - 1];
     this.length--;
-    return Object.values(this.data);
+    return res;
+  }
+
+  shift() {
+    let res = this[0];
+    for (let i = 0; i < this.length - 1; i++) {
+      this[i] = this[i + 1];
+    }
+    delete this[this.length - 1];
+    this.length--;
+    return res;
+  }
+
+  unshift(...values) {
+    for (let i = this.length - 1; i >= 0; i--) {
+      this[i + values.length] = this[i];
+    }
+    for (let i = 0; i < values.length; i++) {
+      this[i] = values[i];
+    }
+    this.length += values.length;
   }
   map(callback) {
-    let newarray = {};
+    let res = [];
     for (let i = 0; i < this.length; i++) {
-      let count = callback(this.data[i], i, Object.values(this.data));
-      newarray[i] = count;
+      res.push(callback(this[i], i, this));
     }
-    return Object.values(newarray);
-  }
+    return res;
+  }   
   filter(callback) {
-    let newarray = {};
+    let res = [];
     for (let i = 0; i < this.length; i++) {
-      if (callback(this.data[i], i, Object.values(this.data))) {
-        newarray[i] = this.data[i];
+      if (callback(this[i], i, this)) {
+        res.push(this[i]);
       }
     }
-    return Object.values(newarray);
+    return res;
   }
-  forEach(callback) {
-    let newarray = {};
-    for (let i = 0; i < this.length; i++) {
-      callback(this.data[i], i, Object.values(this.data));
-    }
-  }
+
   find(callback) {
     for (let i = 0; i < this.length; i++) {
-      if (callback(this.data[i], i, Object.values(this.data)) > 0) {
-        return this.data[i];
+      if (callback(this[i], i, this)) {
+        return this[i];
       }
     }
-    return Object.values(newarray);
   }
-  sort(callback) {
-    const array = Object.values(this.data);
-    for (let i = 0; i < array.length; i++) {
-      for (let j = 0; j < array.length - 1; j++) {
-        if (callback(array[j], array[j + 1]) > 0) {
-          let tem = array[j + 1];
-          array[j + 1] = array[j];
-          array[j] = tem;
-        }
+  concat(...values) {
+    let res = [];
+    for (let i = 0; i < this.length; i++) {
+      res.push(this[i]);
+    }
+    for (let i = 0; i < values.length; i++) {
+      for (let j = 0; j < values[i].length; j++) {
+        res.push(values[i][j]);
       }
     }
-    return array;
-  }
-  reduce(callback, accumulator) {
-    let summ = accumulator ? accumulator : null;
-    const array = Object.values(this.data);
-    for (let i = 0; i < array.length; i++) {
-      summ = callback(summ, array[i]);
+    return res;
+  } 
+  every(callback) {
+    for (let i = 0; i < this.length; i++) {
+      if (!callback(this[i], i, this)) {
+        return false;
+      }
     }
-    return summ;
+    return true;
   }
+
+  some(callback) {
+    for (let i = 0; i < this.length; i++) {
+      if (callback(this[i], i, this)) {
+        return true;
+      }
+    }
+    return false;
+  } 
+  static from(arrayLike) {
+    let res = [];
+    for (let i = 0; i < arrayLike.length; i++) {
+      res.push(arrayLike[i]);
+    }
+    return res;
+  }
+
+  findIndex(callback) {
+    for (let i = 0; i < this.length; i++) {
+      if (callback(this[i], i, this)) {
+        return i;
+      }
+    }
+  }
+  includes(value) {
+    for (let i = 0; i < this.length; i++) {
+      if (this[i] === value) {
+        return true;
+      }
+    }
+    return false;
+  }
+  indexOf(value) {
+    for (let i = 0; i < this.length; i++) {
+      if (this[i] === value) {
+        return i;
+      }
+    }
+    return -1;
+  }
+  lastIndexOf(value) {
+    for (let i = this.length - 1; i >= 0; i--) {
+      if (this[i] === value) {
+        return i;
+      }
+    }
+    return -1;
+  }
+  join(separator) {
+    let res = '';
+    for (let i = 0; i < this.length; i++) {
+      res += this[i];
+      if (i !== this.length - 1) {
+        res += separator;
+      }
+    }
+    return res;
+  }
+  static of(...values) {
+    let res = [];
+    for (let i = 0; i < values.length; i++) {
+      res.push(values[i]);
+    }
+    return res;
+  }
+  static isArray(value) {
+    return value instanceof Array;
+  }
+
+  reverse() {
+    let res = [];
+    for (let i = this.length - 1; i >= 0; i--) {
+      res.push(this[i]);
+    }
+    return res;
+  }
+  slice(start, end) {
+    let res = [];
+    for (let i = start; i < end; i++) {
+      res.push(this[i]);
+    }
+    return res;
+  }
+  keys() {
+    let res = [];
+    for (let i = 0; i < this.length; i++) {
+      res.push(i);
+    }
+    return res;
+  }
+
+  flat(depth) {
+    let res = [];
+    for (let i = 0; i < this.length; i++) {
+      if (Array.isArray(this[i]) && depth > 0) {
+        res = res.concat(this[i].flat(depth - 1));
+      } else {
+        res.push(this[i]);
+      }
+    }
+    return res;
+  }
+  at(index) { 
+    return this[index];
+  }
+  splice(start, deleteCount, ...items) {
+    let res = [];
+    for (let i = 0; i < this.length; i++) {
+      if (i < start || i >= start + deleteCount) {
+        res.push(this[i]);
+      }
+    }
+    for (let i = 0; i < items.length; i++) {
+      res.push(items[i]);
+    }
+    return res;
+  }
+
 }
 
-// let array = new Array();
-// console.log(array.push(3));
-// console.log(array.push(2));
-// console.log(array.push(1));
-// const map = array.map((el, index, arr) => el * 3);
-// console.log(map);
-// const filter = array.filter((el,index,arr)=> el > 2);
-// console.log(filter);
-
-// const foEach = array.forEach((el,index, arr)=> {
-//           console.log(el, index,arr);
-// })
-// const sort= array.sort((a,b)=> a-b);
-// console.log(sort);
-// const reduce = array.reduce((el, s) => el+s);
-// console.log(reduce);
-// const find = array.find(el=> el > 1);
-// console.log(find);
+const array = new Array();
+array.push(1, 2, 3, 4, 5, [1,2,3]);
+console.log(array.splice(1, 2, 6, 7, 8));
