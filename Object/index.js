@@ -46,14 +46,31 @@ class myObject {
 
     static defineProperties(obj, properties) {
         for (let key in properties) {
-            Object.defineProperty(obj, key, properties[key])
+            this.defineProperty(obj, key, properties[key])
         }
         return obj
     }
 
     static defineProperty(obj, key, descriptor) {
-        Object.defineProperty(obj, key, descriptor)
-        return obj
+        if(descriptor.hasOwnProperty('value')) {
+            obj[key] = descriptor.value
+        }
+        if(descriptor.hasOwnProperty('get')|| descriptor.hasOwnProperty('set')) {
+            Object.defineProperty(obj, key, {
+                get: descriptor.get,
+                set: descriptor.set,
+                enumerable: descriptor.enumerable,
+                configurable: descriptor.configurable,
+                writable: descriptor.writable
+            })
+        }else {
+            Object.defineProperty(obj, key, {
+                value: descriptor.value,
+                enumerable: descriptor.enumerable|| false,
+                configurable: descriptor.configurable|| false,
+                writable: descriptor.writable|| false
+            })
+        }
     }
     static freeze(obj) {
         

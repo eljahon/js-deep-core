@@ -2,6 +2,28 @@ class Array {
   constructor() {
     this.length = 0;
   }
+// static methods 
+  static [Symbol.hasInstance](instance) {
+   return Array.isArray(instance)
+  }
+  static of(...values) {
+    let res = [];
+    for (let i = 0; i < values.length; i++) {
+      res.push(values[i]);
+    }
+    return res;
+  }
+  static isArray(value) {
+    return value instanceof Array;
+  }
+  static from(arrayLike) {
+    let res = [];
+    for (let i = 0; i < arrayLike.length; i++) {
+      res.push(arrayLike[i]);
+    }
+    return res;
+  }
+  //  insteance methods 
   toString() {
   return `[${this.join(', ')}]`;
 }
@@ -10,7 +32,13 @@ class Array {
         callback(this[i], i, this)
     }
   }
-
+  reduce(callback, initialValue) {
+    let accumulator = initialValue;
+    for(let i=0; i<this.length; i++) {
+      accumulator = callback(accumulator, this[i], i, this)
+    }
+    return accumulator
+  }
   push(...values) {
     for (let i = 0; i < values.length; i++) {
       this[this.length] = values[i];
@@ -96,13 +124,7 @@ class Array {
     }
     return false;
   } 
-  static from(arrayLike) {
-    let res = [];
-    for (let i = 0; i < arrayLike.length; i++) {
-      res.push(arrayLike[i]);
-    }
-    return res;
-  }
+ 
 
   findIndex(callback) {
     for (let i = 0; i < this.length; i++) {
@@ -145,16 +167,7 @@ class Array {
     }
     return res;
   }
-  static of(...values) {
-    let res = [];
-    for (let i = 0; i < values.length; i++) {
-      res.push(values[i]);
-    }
-    return res;
-  }
-  static isArray(value) {
-    return value instanceof Array;
-  }
+
 
   reverse() {
     let res = [];
@@ -210,3 +223,4 @@ class Array {
 const array = new Array();
 array.push(1, 2, 3, 4, 5, [1,2,3]);
 console.log(array.splice(1, 2, 6, 7, 8));
+console.log(array);
