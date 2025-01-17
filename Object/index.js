@@ -46,7 +46,7 @@ class myObject {
 
     static defineProperties(obj, properties) {
         for (let key in properties) {
-            this.defineProperty(obj, key, properties[key])
+            myObject.defineProperty(obj, key, properties[key])
         }
         return obj
     }

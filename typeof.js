@@ -7,8 +7,6 @@ var findMedianSortedArrays = function(nums1, nums2) {
     const num = nums1.concat(nums2).sort((a,b) => a-b);
     const all = num.length;
     const mid =num.length/2;
-
-debugger
     return all === mid ? ((num[mid]+num[mid-1])/2).toFixed(5) : num[mid]; 
 };
 

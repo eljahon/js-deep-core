@@ -45,20 +45,37 @@
 // console.log(myBool.toString()); 
 // console.log(myBool); 
 
+var reverseStr = function(s, k) {
+  let res =[];
+  let bit=''+s[0];
+  debugger
+  for(let i=1; i<s.length; i++){
+      if(bit.length===k){
+          res.push(bit)
+          bit=''
+          bit+=s[i]
+      }
+     else  bit+=s[i]
+  }
+  console.log(res, bit, 'bit res ==>');
+  
+  return  res.map((el, index) => {
+      if(index%2===0) return reverBitString(el)
 
-// var convert = function(s, numRows) {
-//   if(numRows<2) return s;
-//   const divisor = (numRows-1)*2;
-//   const rows = Array(numRows).fill("");
-//   debugger
+        return el
+  }).join('')+bit
+  
+};
 
-//   for(let div = 0; div<s.length; div++) {
-//       const mod = div % divisor;
-//       const rowIndex = mod < numRows ? mod : divisor-mod;
-//       rows[rowIndex]+=s[div]
-//   }
 
-//   return rows.join('')
-// };
+var reverBitString=function (s) {
+  let res ='';
+  for(let i=s.length-1; i>=0; i--) {
+      res+=s[i]
+  }
+  return res;
+}
 
-// console.log(convert("PAYPALISHIRING", 3));
+console.log(reverseStr("abcdefg", 8));
+
+  
